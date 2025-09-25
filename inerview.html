@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Candidate Interview Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Candidate Interview Form</h2>
+    <form id="interviewForm">
+      <label for="fullname">Full Name</label>
+      <input id="fullname" name="fullname" type="text" required>
+
+      <label for="contact">Contact Number</label>
+      <input id="contact" name="contact" type="tel" required>
+
+      <label for="email">Email Address</label>
+      <input id="email" name="email" type="email" required>
+
+      <label for="currentAddress">Current Address</label>
+      <input id="currentAddress" name="currentAddress" type="text" required>
+
+      <label for="permanentAddress">Permanent Address</label>
+      <input id="permanentAddress" name="permanentAddress" type="text">
+
+      <label for="position">Position Applied For</label>
+      <input id="position" name="position" type="text" required>
+
+      <label for="experience">Total Years of Experience</label>
+      <select id="experience" name="experience" required>
+        <option value="">--Select--</option>
+        <option value="Fresher">Fresher</option>
+        <option value="0-1">0–1 Years</option>
+        <option value="2-5">2–5 Years</option>
+        <option value="6-10">6–10 Years</option>
+        <option value="10+">10+ Years</option>
+      </select>
+
+      <div id="extraFields" class="hidden">
+        <label for="company">Previous Company Name</label>
+        <input id="company" name="company" type="text">
+
+        <label for="ctc">Current CTC (in INR)</label>
+        <input id="ctc" name="ctc" type="number" min="0" step="1">
+      </div>
+
+      <label for="skills">Key Skills</label>
+      <textarea id="skills" name="skills" rows="3"></textarea>
+
+      <label for="qualification">Highest Qualification</label>
+      <input id="qualification" name="qualification" type="text">
+
+      <label for="mode">Preferred Interview Mode</label>
+      <select id="mode" name="mode" required>
+        <option value="">--Select--</option>
+        <option value="Online">Online</option>
+        <option value="Offline">Offline</option>
+        <option value="Telephonic">Telephonic</option>
+      </select>
+
+      <label for="cv">Upload CV (PDF/DOC)</label>
+      <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" required>
+
+      <div class="checkbox">
+        <input id="confirm" name="confirm" type="checkbox" required>
+        <label for="confirm">I confirm that the above information is correct.</label>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+     </div>
+
+  <script src="interview.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accessories Handover Form</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Accessories Handover Form</h2>
+    <form id="handoverForm">
+      <div class="form-group">
+        <label>Rider Name</label>
+        <input type="text" id="riderName" required/>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email"/>
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" id="phone" required/>
+      </div>
+
+      <div class="form-group">
+        <label>Accessories</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="accessories" value="Helmet"/> Helmet</label>
+          <label><input type="checkbox" name="accessories" value="T-shirt"/> T-shirt</label>
+          <label><input type="checkbox" name="accessories" value="Raincoat"/> Raincoat</label>
+          <label><input type="checkbox" name="accessories" value="Helmet Exchange"/> Helmet Exchange</label>
+          <label><input type="checkbox" name="accessories" value="T-shirt Exchange"/> T-shirt Exchange</label>
+          <label><input type="checkbox" name="accessories" value="Raincoat Exchange"/> Raincoat Exchange</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Handover By</label>
+        <input type="text" id="handoverBy" required/>
+      </div>
+
+      <div class="form-group">
+        <label>Remarks</label>
+        <textarea id="remarks"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit</button>
+    </form>
+  </div>
+
+  <script src="accessories.js"></script>
+</body>
+</html>
