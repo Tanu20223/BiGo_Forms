@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Disable button immediately
   submitBtn.disabled = true;
-  submitBtn.innerText = "Submitting...";
+  submitBtn.innerText = "Submit";
 
   try {
     const formData = {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       visitorName: document.getElementById("visitorName").value,
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
-      altPhone: document.getElementById("altNumber").value,
+      altNumber: document.getElementById("altNumber").value,
       area: document.getElementById("area").value,
       reference: document.getElementById("reference").value,
       trainingType: document.getElementById("trainingType").value,
@@ -54,4 +54,5 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.innerText = "Submit";
   }
 });
+
 
