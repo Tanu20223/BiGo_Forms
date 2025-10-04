@@ -47,9 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .finally(() => {
             // Re-enable button after everything is done
-            submitBtn.disabled = false;
+            submitBtn.disabled = true;
             submitBtn.innerText = "Submit";
         });
     });
   
+
 
