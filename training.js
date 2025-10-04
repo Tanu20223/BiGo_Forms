@@ -16,19 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+     // Disable button immediately
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Submit";
 
-  // Disable button immediately
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Submit";
-
-  try {
     const formData = {
       formType: "training",
       visitorName: document.getElementById("visitorName").value,
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
-      altNumber: document.getElementById("altNumber").value,
+      altPhone: document.getElementById("altNumber").value,
       area: document.getElementById("area").value,
       reference: document.getElementById("reference").value,
       trainingType: document.getElementById("trainingType").value,
@@ -45,15 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("✅ Training data saved!");
     form.reset();
     previousJobGroup.classList.add("hidden");
-  } catch (error) {
-    alert("❌ Something went wrong! Please try again.");
-    console.error(error);
-  } finally {
-    // Re-enable button
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Submit";
-  }
-});
-
-
+    
+  })
+  .finally(() => {
+            // Re-enable button after everything is done
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit";
+        });
+    });
+  
 
