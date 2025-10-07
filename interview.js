@@ -34,7 +34,7 @@ form.addEventListener('submit', e => {
             cv_filename: file.name
         };
 
-        fetch('https://script.google.com/macros/s/AKfycbwPXguPTxpBljGq8bq6_5KCrHmMht8RuDokT42CdsK2CS-b2QkpPCyrWGmKAecsuSYvAw/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbwsAGCLp8Xun3xVy77WqwYM5nTpm610ixzse5u6cwCaS_XZBjL5MiQOS0MAft_tZOrCMg/exec', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: { 'Content-Type': 'text/plain' }
@@ -51,4 +51,5 @@ form.addEventListener('submit', e => {
 
     reader.readAsDataURL(file);
 });
+
 
