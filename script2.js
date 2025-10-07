@@ -34,7 +34,7 @@ form.addEventListener('submit', e => {
   Promise.all(fileIds.map(id => toBase64(document.getElementById(id).files[0])))
   .then(files => {
     const data = {
-      formType: "bgv_form",
+      formType: "bgv",
       name: form.name.value,
       email: form.email.value,
       phone: form.phone.value,
@@ -87,6 +87,7 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
+
 
 
 
