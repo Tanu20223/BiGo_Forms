@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz5ZOWI7X2EKy9GArmWpaahD55OoFPen1Tn2o2Pi7IXA0un2my47fcNx59h4IKz-wWs1Q/exec";
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPXguPTxpBljGq8bq6_5KCrHmMht8RuDokT42CdsK2CS-b2QkpPCyrWGmKAecsuSYvAw/exec";
 
   const phoneCheckForm = document.getElementById("phoneCheckForm");
   const trainingForm = document.getElementById("trainingForm");
@@ -82,7 +82,7 @@ followupForm.addEventListener("submit", async (e) => {
   // ✅ Redirect to BGV form if selection is Yes
   if (data.selection.toLowerCase() === "yes") {
     alert("Redirecting to BGV form...");
-    window.location.href = "indexbgv.html"; // make sure this file name matches your BGV page
+    window.location.href = "index2.html"; // make sure this file name matches your BGV page
   } else {
     followupForm.reset();
     followupForm.classList.add("hidden");
@@ -105,3 +105,4 @@ followupForm.addEventListener("submit", async (e) => {
     }
   }
 });
+
