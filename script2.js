@@ -1,4 +1,4 @@
-const form = document.getElementById('bgvForm');
+const form = document.getElementById('bgv');
 const status = document.getElementById('successMessage');
 const submitBtn = form.querySelector('button[type="submit"]');
 const bgvType = document.getElementById('bgvType');
@@ -87,5 +87,6 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
+
 
 
