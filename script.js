@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const purpose = formData.purpose.trim().toLowerCase();
 
 if ( purpose === "training" ) {
-    window.location.href = "training.html";
+    window.location.href = "indextraining.html";
 } else if (purpose === "bikedelivery") {
    window.location.href = "vehicle.html";
 }else if (purpose === "accessories") {
@@ -56,3 +56,4 @@ form.reset();
 otherPurposeGroup.classList.add("hidden");
 });
 });
+
