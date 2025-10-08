@@ -69,7 +69,7 @@ form.addEventListener('submit', e => {
     return fetch('https://script.google.com/macros/s/AKfycbxYomKaXChqynVrkKiq5CNTGn_BSloVWIS2GjypoOdqwFTCgv0XDDqHUnRkiPt5f5XE1A/exec', {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'text/plain' } // ✅ fixed
+      headers: { 'Content-Type': "application/json" } // ✅ fixed
     });
   })
   .then(res => res.json())
@@ -85,5 +85,6 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
+
 
 
