@@ -65,7 +65,7 @@ form.addEventListener('submit', e => {
       utrNo: form.utrNo.value,
     };
 
-    return fetch('https://script.google.com/macros/s/AKfycbxRhlmWS2RLATtAj09kEY8jX_0TG-4hsrzrolOPebLJp_UFXByRT9GBgxmY96MPcM6Dhw/exec', {
+    return fetch('https://script.google.com/macros/s/AKfycbxavoZpVMjt5GxNW83NSXm7E_wv2pYt08dx4HB8os3OxiK6AKG1wYY-jFvciCqhwkXh4Q/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(data)
@@ -88,5 +88,6 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
+
 
 
