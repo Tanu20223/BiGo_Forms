@@ -66,7 +66,7 @@ form.addEventListener('submit', e => {
       utrNo: form.utrNo.value,
     };
 
-    return fetch('YOUR_WEBAPP_DEPLOYMENT_URL', {
+    return fetch('https://script.google.com/macros/s/AKfycbxYomKaXChqynVrkKiq5CNTGn_BSloVWIS2GjypoOdqwFTCgv0XDDqHUnRkiPt5f5XE1A/exec', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'text/plain' } // ✅ fixed
@@ -85,4 +85,5 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
+
 
