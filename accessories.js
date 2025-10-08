@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("handoverForm");
 
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwsAGCLp8Xun3xVy77WqwYM5nTpm610ixzse5u6cwCaS_XZBjL5MiQOS0MAft_tZOrCMg/exec";
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx4yXD5S23Suxb8IQGPRkOS9NGB1ggv5sJtbKvTmz_cLiA3ooAO04iMc4vrSVH9iCnVSg/exec";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -41,5 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
