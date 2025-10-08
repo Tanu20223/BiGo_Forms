@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formType: "training",
       visitorName: document.getElementById("visitorName").value,
       email: document.getElementById("email").value,
-      phone: currentPhone,
+      phone: document.getElementById("phone").value,
       altNumber: document.getElementById("altNumber").value,
       area: document.getElementById("area").value,
       reference: document.getElementById("reference").value,
@@ -105,4 +105,5 @@ followupForm.addEventListener("submit", async (e) => {
     }
   }
 });
+
 
