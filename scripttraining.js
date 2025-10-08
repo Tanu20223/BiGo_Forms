@@ -4,10 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneCheckForm = document.getElementById("phoneCheckForm");
   const trainingForm = document.getElementById("trainingForm");
   const followupForm = document.getElementById("followupForm");
-
   let currentPhone = "";
 
-  // 1️⃣ Step 1: Check phone number
+  // Step 1: Phone check
   phoneCheckForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const phone = document.getElementById("phoneLookup").value.trim();
@@ -19,20 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       if (data.success) {
-        // Record found → show follow-up form
         phoneCheckForm.classList.add("hidden");
         followupForm.classList.remove("hidden");
 
         // Fill read-only details
-        document.getElementById("f_visitorName").value = data.visitorName;
-        document.getElementById("f_email").value = data.email;
-        document.getElementById("f_altNumber").value = data.altNumber;
-        document.getElementById("f_area").value = data.area;
-        document.getElementById("f_reference").value = data.reference;
-        document.getElementById("f_trainingType").value = data.trainingType;
-        document.getElementById("f_previousJob").value = data.previousJob;
+        document.getElementById("f_visitorName").value = data.visitorName || "";
+        document.getElementById("f_email").value = data.email || "";
+        document.getElementById("f_altNumber").value = data.altNumber || "";
+        document.getElementById("f_area").value = data.area || "";
+        document.getElementById("f_reference").value = data.reference || "";
+        document.getElementById("f_trainingType").value = data.trainingType || "";
+        document.getElementById("f_previousJob").value = data.previousJob || "";
       } else {
-        // No record → show training form
         phoneCheckForm.classList.add("hidden");
         trainingForm.classList.remove("hidden");
       }
@@ -42,9 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 2️⃣ Step 2: Submit Training Form
+  // Step 2: Submit Training Form
   trainingForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!currentPhone) return alert("Phone number missing.");
 
     const data = {
       formType: "training",
@@ -63,49 +61,44 @@ document.addEventListener("DOMContentLoaded", () => {
     trainingForm.classList.add("hidden");
   });
 
-  // 3️⃣ Step 3: Submit Follow-up Form
-followupForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const data = {
-    formType: "followup",
-    phone: currentPhone,
-    interviewBy: document.getElementById("interviewBy").value,
-    trainingBy: document.getElementById("trainingBy").value,
-    trainingStatus: document.getElementById("trainingStatus").value,
-    trainedBy: document.getElementById("trainedBy").value,
-    selection: document.getElementById("selection").value,
-    finalRemark: document.getElementById("finalRemark").value,
-  };
+  // Step 3: Submit Follow-up Form
+  followupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = {
+      formType: "followup",
+      phone: currentPhone,
+      interviewBy: document.getElementById("interviewBy").value,
+      trainingBy: document.getElementById("trainingBy").value,
+      trainingStatus: document.getElementById("trainingStatus").value,
+      trainedBy: document.getElementById("trainedBy").value,
+      selection: document.getElementById("selection").value,
+      finalRemark: document.getElementById("finalRemark").value,
+    };
 
-  await submitData(data, "Follow-up data submitted successfully!");
+    await submitData(data, "Follow-up data submitted successfully!");
 
-  // ✅ Redirect to BGV form if selection is Yes
-  if (data.selection.toLowerCase() === "yes") {
-    alert("Redirecting to BGV form...");
-    window.location.href = "index2.html"; // make sure this file name matches your BGV page
-  } else {
-    followupForm.reset();
-    followupForm.classList.add("hidden");
-    location.reload();
-  }
-});
+    if (data.selection.toLowerCase() === "yes") {
+      window.location.href = "index2.html";
+    } else {
+      followupForm.reset();
+      followupForm.classList.add("hidden");
+      location.reload();
+    }
+  });
 
   async function submitData(data, successMsg) {
     try {
-      await fetch(WEB_APP_URL, {
+      const res = await fetch(WEB_APP_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(data),
       });
-      alert(successMsg);
-      location.reload();
+      const result = await res.json();
+      if (result.status === "success") alert(successMsg);
+      else alert("Error: " + (result.message || "Unknown error"));
     } catch (err) {
       alert("Submission failed!");
       console.error(err);
     }
   }
 });
-
-
-
-
