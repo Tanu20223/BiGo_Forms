@@ -69,7 +69,7 @@ form.addEventListener('submit', e => {
     return fetch('YOUR_WEBAPP_DEPLOYMENT_URL', {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' } // ✅ fixed
+      headers: { 'Content-Type': 'text/plain' } // ✅ fixed
     });
   })
   .then(res => res.json())
@@ -85,3 +85,4 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
+
