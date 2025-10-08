@@ -1,4 +1,4 @@
-const form = document.getElementById('bgvForm');
+const form = document.getElementById('bgv'); // ✅ matches your HTML
 const status = document.getElementById('successMessage');
 const submitBtn = form.querySelector('button[type="submit"]');
 const bgvType = document.getElementById('bgvType');
@@ -18,7 +18,6 @@ form.addEventListener('submit', e => {
   submitBtn.disabled = true;
   submitBtn.innerText = "Submitting...";
 
-  // Helper to convert file to base64
   const toBase64 = (file) => new Promise(resolve => {
     if (!file) return resolve({ base64: null, filename: "" });
     const reader = new FileReader();
@@ -26,11 +25,11 @@ form.addEventListener('submit', e => {
     reader.readAsDataURL(file);
   });
 
-  // Collect files
   const fileIds = [
     'aadharFront','aadharBack','voterFront','voterBack',
     'dlFront','dlBack','panFront','panBack','selfie','receipt'
   ];
+
   Promise.all(fileIds.map(id => toBase64(document.getElementById(id).files[0])))
   .then(files => {
     const data = {
@@ -65,13 +64,12 @@ form.addEventListener('submit', e => {
       position: form.position.value,
       joinDate: form.joinDate.value,
       utrNo: form.utrNo.value,
-      
     };
 
-    return fetch('https://script.google.com/macros/s/AKfycbxYomKaXChqynVrkKiq5CNTGn_BSloVWIS2GjypoOdqwFTCgv0XDDqHUnRkiPt5f5XE1A/exec', {
+    return fetch('YOUR_WEBAPP_DEPLOYMENT_URL', {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'text/plain' }
+      headers: { 'Content-Type': 'application/json' } // ✅ fixed
     });
   })
   .then(res => res.json())
@@ -87,5 +85,3 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
-
-
