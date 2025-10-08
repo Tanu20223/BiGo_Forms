@@ -1,16 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("trainingForm");
   const trainingTypeSelect = document.getElementById("trainingType");
-  const previousJobGroup = document.getElementById("previousJobGroup");
-  const submitBtn = form.querySelector('button[type="submit"]'); // ✅ define submit button
-
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx4yXD5S23Suxb8IQGPRkOS9NGB1ggv5sJtbKvTmz_cLiA3ooAO04iMc4vrSVH9iCnVSg/exec"; // 🔹 replace
-
-  // Show/hide Previous Job
-  trainingTypeSelect.addEventListener("change", () => {
-    if (trainingTypeSelect.value === "job") {
-      previousJobGroup.classList.remove("hidden");
-    } else {
+  const 
       previousJobGroup.classList.add("hidden");
     }
   });
@@ -52,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   
+
 
 
 
