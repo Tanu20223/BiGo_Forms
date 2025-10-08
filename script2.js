@@ -1,4 +1,4 @@
-const form = document.getElementById('bgv');
+const form = document.getElementById('bgvForm');
 const status = document.getElementById('successMessage');
 const submitBtn = form.querySelector('button[type="submit"]');
 const bgvType = document.getElementById('bgvType');
@@ -34,7 +34,7 @@ form.addEventListener('submit', e => {
   Promise.all(fileIds.map(id => toBase64(document.getElementById(id).files[0])))
   .then(files => {
     const data = {
-      formType: "bgv",
+      formType: "bgv_form",
       name: form.name.value,
       email: form.email.value,
       phone: form.phone.value,
@@ -87,9 +87,3 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
-
-
-
-
-
-
