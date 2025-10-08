@@ -82,7 +82,7 @@ followupForm.addEventListener("submit", async (e) => {
   // ✅ Redirect to BGV form if selection is Yes
   if (data.selection.toLowerCase() === "yes") {
     alert("Redirecting to BGV form...");
-    window.location.href = "index2.html"; // make sure this file name matches your BGV page
+    window.location.href = "indexbgv.html"; // make sure this file name matches your BGV page
   } else {
     followupForm.reset();
     followupForm.classList.add("hidden");
@@ -105,6 +105,3 @@ followupForm.addEventListener("submit", async (e) => {
     }
   }
 });
-
-
-
