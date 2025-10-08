@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzdqJeXOjkqBAu0jqv1_Z8N4k0buZTGwbHVtZ9-Jo9GsCiXnYi53zy-QKA-zZAwe9S3UQ/exec"; // replace with your deployed web app URL
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwyhGVfHvCMYT_wzGWqUmn3y2EWoReHErqTi-DZLJnSTKu6l8bqQtF5_AxYfZyRC7jU/exec"; // replace with your deployed web app URL
 
   const phoneCheckForm = document.getElementById("phoneCheckForm");
   const trainingForm = document.getElementById("trainingForm");
@@ -118,3 +118,4 @@ document.addEventListener("DOMContentLoaded", () => {
     else prevJobGroup.classList.add("hidden");
   });
 });
+
