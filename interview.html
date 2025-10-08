@@ -46,31 +46,36 @@
         <input id="ctc" name="ctc" type="number" min="0" step="1">
       </div>
 
-      <label for="skills">Key Skills</label>
-      <textarea id="skills" name="skills" rows="3"></textarea>
-
       <label for="qualification">Highest Qualification</label>
       <input id="qualification" name="qualification" type="text">
 
-      <label for="mode">Preferred Interview Mode</label>
-      <select id="mode" name="mode" required>
+      <!-- 🔹 Interview Type moved HERE -->
+      <label for="interviewType">Interview Type</label>
+      <select id="interviewType" name="interviewType" required>
         <option value="">--Select--</option>
-        <option value="Online">Online</option>
-        <option value="Offline">Offline</option>
-        <option value="Telephonic">Telephonic</option>
+        <option value="Sir">Interview with Sir</option>
+        <option value="Rider">Rider Interview</option>
       </select>
+      <!-- 🔹 Key Skills (only for Sir Interview) -->
+      <div id="skillsSection">
+        <label for="skills">Key Skills</label>
+        <textarea id="skills" name="skills" rows="3"></textarea>
+      </div>
 
-      <label for="cv">Upload CV (PDF/DOC)</label>
-      <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" required>
+      <!-- 🔹 CV Upload (only for Sir Interview) -->
+      <div id="cvSection">
+        <label for="cv">Upload CV (PDF/DOC)</label>
+        <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx">
+      </div>
 
       <div class="checkbox">
         <input id="confirm" name="confirm" type="checkbox" required>
         <label for="confirm">I confirm that the above information is correct.</label>
       </div>
 
-      <button type="submit">Submit</button>
+      <button type="submit" class="btn-submit">Submit</button>
     </form>
-     </div>
+  </div>
 
   <script src="interview.js"></script>
 </body>
