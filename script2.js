@@ -1,9 +1,25 @@
-const form = document.getElementById('bgvForm');
+const form = document.getElementById('bgv');
 const status = document.getElementById('successMessage');
 const submitBtn = form.querySelector('button[type="submit"]');
 const bgvType = document.getElementById('bgvType');
 const rentalSection = document.getElementById('rentalSection');
 const jobSection = document.getElementById('jobSection');
+
+// ⚡ Auto-fill Name, Email, Phone from localStorage
+window.addEventListener("DOMContentLoaded", () => {
+  const name = localStorage.getItem("bgv_name");
+  const email = localStorage.getItem("bgv_email");
+  const phone = localStorage.getItem("bgv_phone");
+
+  if (name) document.getElementById("name").value = name;
+  if (email) document.getElementById("email").value = email;
+  if (phone) document.getElementById("phone").value = phone;
+
+  // Optional: make them read-only
+  // document.getElementById("name").readOnly = true;
+  // document.getElementById("email").readOnly = true;
+  // document.getElementById("phone").readOnly = true;
+});
 
 // Show/hide rental or job fields
 bgvType.addEventListener('change', () => {
@@ -18,7 +34,6 @@ form.addEventListener('submit', e => {
   submitBtn.disabled = true;
   submitBtn.innerText = "Submitting...";
 
-  // Helper to convert file to base64
   const toBase64 = (file) => new Promise(resolve => {
     if (!file) return resolve({ base64: null, filename: "" });
     const reader = new FileReader();
@@ -26,15 +41,14 @@ form.addEventListener('submit', e => {
     reader.readAsDataURL(file);
   });
 
-  // Collect files
   const fileIds = [
     'aadharFront','aadharBack','voterFront','voterBack',
     'dlFront','dlBack','panFront','panBack','selfie','receipt'
   ];
-  Promise.all(fileIds.map(id => toBase64(document.getElementById(id).files[0])))
-  .then(files => {
+
+  Promise.all(fileIds.map(id => toBase64(document.getElementById(id).files[0]))).then(files => {
     const data = {
-      formType: "bgv_form",
+      formType: "bgv",
       name: form.name.value,
       email: form.email.value,
       phone: form.phone.value,
@@ -65,18 +79,25 @@ form.addEventListener('submit', e => {
       position: form.position.value,
       joinDate: form.joinDate.value,
       utrNo: form.utrNo.value,
-      
     };
 
     return fetch('https://script.google.com/macros/s/AKfycbyOyYWG-ckl19KXrlVUOy-4GaevnsRN6dkt4csc6oU8AsDRA_2nbkfRh5WlD9Kwxlqgnw/exec', {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'text/plain' }
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
     });
   })
   .then(res => res.json())
   .then(result => {
-    status.innerText = result.message || "Form submitted successfully!";
+    if (result.status === "success") {
+      status.innerText = result.message || "Form submitted successfully!";
+      // ⚡ Clear localStorage after success
+      localStorage.removeItem("bgv_name");
+      localStorage.removeItem("bgv_email");
+      localStorage.removeItem("bgv_phone");
+    } else {
+      status.innerText = "Error: " + (result.message || "Something went wrong.");
+    }
     form.reset();
     rentalSection.classList.add('hidden');
     jobSection.classList.add('hidden');
@@ -87,6 +108,3 @@ form.addEventListener('submit', e => {
     submitBtn.innerText = "Submit";
   });
 });
-
-
-
