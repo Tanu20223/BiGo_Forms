@@ -78,7 +78,7 @@ form.addEventListener('submit', e => {
             odometer_filename: odometer.filename
         };
 
-        fetch('https://script.google.com/macros/s/AKfycbxavoZpVMjt5GxNW83NSXm7E_wv2pYt08dx4HB8os3OxiK6AKG1wYY-jFvciCqhwkXh4Q/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbzgmbTpCJ3PTBj34pJClo_5KXLo4NixtjihDgVhW0t8QbCKo_zfIfZNIOCagDrXI-zCvg/exec', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: { 'Content-Type': 'text/plain' }
@@ -99,6 +99,7 @@ form.addEventListener('submit', e => {
         });
     });
 });
+
 
 
 
