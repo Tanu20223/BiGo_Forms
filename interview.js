@@ -85,7 +85,7 @@ function sendData(base64Data, filename) {
     cv_filename: filename
   };
 
-  fetch('https://script.google.com/macros/s/AKfycbwgmZXenGpjfhNQE3hNIWiWP5MW3lW9pokP-GO0SDQwsLlVtnmQskstjQUqfgOdHC-Ivg/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbxxcm8FyBjy_Krqz-SxAFEpNWKlRftG_6HmcKja-8MNHgv73s1Gh1DDoe5roVOOt1EONg/exec', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'text/plain' }
@@ -103,6 +103,7 @@ function sendData(base64Data, filename) {
     status.innerText = '❌ Error: ' + err.message;
   });
 }
+
 
 
 
