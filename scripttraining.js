@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const data = {
       formType: "training",
-      phone: currentPhone,
       visitorName: document.getElementById("visitorName").value,
       email: document.getElementById("email").value,
+      phone: currentPhone,
       altNumber: document.getElementById("altNumber").value,
       area: document.getElementById("area").value,
       reference: document.getElementById("reference").value,
@@ -105,6 +105,7 @@ followupForm.addEventListener("submit", async (e) => {
     }
   }
 });
+
 
 
 
