@@ -1,70 +1,111 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("trainingForm");
-  const trainingTypeSelect = document.getElementById("trainingType");
-  const previousJobGroup = document.getElementById("previousJobGroup");
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const phoneInput = document.getElementById("f_phone");
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyOyYWG-ckl19KXrlVUOy-4GaevnsRN6dkt4csc6oU8AsDRA_2nbkfRh5WlD9Kwxlqgnw/exec";
 
-  // Show/hide previous job field
-  trainingTypeSelect.addEventListener("change", () => {
-    if (trainingTypeSelect.value === "Experienced") {
-      previousJobGroup.classList.remove("hidden");
-    } else {
-      previousJobGroup.classList.add("hidden");
-    }
-  });
+  const phoneCheckForm = document.getElementById("phoneCheckForm");
+  const trainingForm = document.getElementById("trainingForm");
+  const followupForm = document.getElementById("followupForm");
 
-  form.addEventListener("submit", async (e) => {
+  let currentPhone = "";
+
+  // 1️⃣ Step 1: Check phone number
+  phoneCheckForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Submitting...";
-
-    const formData = {
-      formType: "training",
-      name: document.getElementById("f_visitorName").value.trim(),
-      email: document.getElementById("f_email").value.trim(),
-      phone: phoneInput.value.trim(),
-      trainingType: trainingTypeSelect.value,
-      previousJob: document.getElementById("previousJob").value.trim(),
-      selection: document.querySelector('input[name="selection"]:checked')?.value || "",
-      remark: document.getElementById("remark").value.trim(),
-      date: new Date().toLocaleDateString(),
-    };
+    const phone = document.getElementById("phoneLookup").value.trim();
+    if (!phone) return alert("Enter a phone number");
+    currentPhone = phone;
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyOyYWG-ckl19KXrlVUOy-4GaevnsRN6dkt4csc6oU8AsDRA_2nbkfRh5WlD9Kwxlqgnw/exec", {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(`${WEB_APP_URL}?phone=${encodeURIComponent(phone)}`);
+      const data = await res.json();
 
-      const result = await response.json();
+      if (data.success) {
+        // Record found → show follow-up form
+        phoneCheckForm.classList.add("hidden");
+        followupForm.classList.remove("hidden");
 
-      if (result.status === "success") {
-        alert("Form submitted successfully!");
-
-        // ⚡ Save data for auto-fill in BGV form
-        if (formData.selection.toLowerCase() === "yes") {
-          localStorage.setItem("bgv_name", formData.name);
-          localStorage.setItem("bgv_email", formData.email);
-          localStorage.setItem("bgv_phone", formData.phone);
-
-          // ⚡ Redirect to BGV form
-          alert("Redirecting to BGV form...");
-          window.location.href = "index2.html";
-        }
-
-        // Reset form if not redirected
-        form.reset();
-        previousJobGroup.classList.add("hidden");
+        // Fill read-only details
+        document.getElementById("f_visitorName").value = data.visitorName;
+        document.getElementById("f_email").value = data.email;
+        document.getElementById("f_altNumber").value = data.altNumber;
+        document.getElementById("f_area").value = data.area;
+        document.getElementById("f_reference").value = data.reference;
+        document.getElementById("f_trainingType").value = data.trainingType;
+        document.getElementById("f_previousJob").value = data.previousJob;
       } else {
-        alert("Error submitting form. Please try again.");
+        // No record → show training form
+        phoneCheckForm.classList.add("hidden");
+        trainingForm.classList.remove("hidden");
       }
     } catch (err) {
-      alert("Error: " + err.message);
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit";
+      alert("Error checking phone number");
+      console.error(err);
     }
   });
+
+  // 2️⃣ Step 2: Submit Training Form
+  trainingForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      formType: "training",
+      visitorName: document.getElementById("visitorName").value,
+      email: document.getElementById("email").value,
+      phone: currentPhone,
+      altNumber: document.getElementById("altNumber").value,
+      area: document.getElementById("area").value,
+      reference: document.getElementById("reference").value,
+      trainingType: document.getElementById("trainingType").value,
+      previousJob: document.getElementById("previousJob").value,
+    };
+
+    await submitData(data, "Training data submitted successfully!");
+    trainingForm.reset();
+    trainingForm.classList.add("hidden");
+  });
+
+  // 3️⃣ Step 3: Submit Follow-up Form
+  followupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = {
+      formType: "followup",
+      phone: currentPhone,
+      interviewBy: document.getElementById("interviewBy").value,
+      trainingBy: document.getElementById("trainingBy").value,
+      trainingStatus: document.getElementById("trainingStatus").value,
+      trainedBy: document.getElementById("trainedBy").value,
+      selection: document.getElementById("selection").value,
+      finalRemark: document.getElementById("finalRemark").value,
+    };
+
+    await submitData(data, "Follow-up data submitted successfully!");
+
+    // ✅ Save details for BGV auto-fill if selection is Yes
+    if (data.selection.toLowerCase() === "yes") {
+      localStorage.setItem("bgv_name", document.getElementById("f_visitorName").value);
+      localStorage.setItem("bgv_email", document.getElementById("f_email").value);
+      localStorage.setItem("bgv_phone", document.getElementById("f_altNumber").value);
+
+      alert("Redirecting to BGV form...");
+      window.location.href = "index2.html"; // make sure this file name matches your BGV page
+    } else {
+      followupForm.reset();
+      followupForm.classList.add("hidden");
+      location.reload();
+    }
+  });
+
+  async function submitData(data, successMsg) {
+    try {
+      await fetch(WEB_APP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(data),
+      });
+      alert(successMsg);
+      location.reload();
+    } catch (err) {
+      alert("Submission failed!");
+      console.error(err);
+    }
+  }
 });
